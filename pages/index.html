@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contr packages</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1d1d1f; --bg: #ffffff; --code: #f2f2f4; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e8e8ea; --bg: #151517; --code: #232326; } }
+  body { margin: 0 auto; max-width: 46rem; padding: 2rem 1rem; font: 16px/1.55 system-ui, sans-serif; color: var(--fg); background: var(--bg); }
+  pre { background: var(--code); padding: .9rem 1rem; border-radius: 8px; overflow-x: auto; }
+  code { font-family: ui-monospace, monospace; font-size: .92em; }
+</style>
+</head>
+<body>
+<h1>Contr packages</h1>
+<p>Signed APT and DNF repositories for <a href="https://github.com/contr-hq/contr">Contr</a>.
+<code>stable</code> holds releases; <code>testing</code> also holds prereleases. The <code>contr</code> desktop app is built
+for Ubuntu 26.04 and Fedora 44; <code>contr-daemon</code>, the daemon and CLI, needs glibc 2.39 or newer.</p>
+
+<h2>Ubuntu and Debian</h2>
+<pre><code>sudo curl -fsSo /usr/share/keyrings/contr.gpg https://contr-hq.github.io/contr-packages/contr.gpg
+echo "deb [signed-by=/usr/share/keyrings/contr.gpg] https://contr-hq.github.io/contr-packages/apt stable main" |
+  sudo tee /etc/apt/sources.list.d/contr.list
+sudo apt update &amp;&amp; sudo apt install contr</code></pre>
+
+<h2>Fedora</h2>
+<pre><code>sudo curl -fsSo /etc/yum.repos.d/contr-stable.repo https://contr-hq.github.io/contr-packages/rpm/contr-stable.repo
+sudo dnf install contr</code></pre>
+
+<p>Replace <code>stable</code> with <code>testing</code> for prereleases. The signing key is
+<a href="KEY.asc">KEY.asc</a>.</p>
+</body>
+</html>
