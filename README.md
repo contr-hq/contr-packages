@@ -69,7 +69,8 @@ every user has to trust a new one.
 ## Building locally
 
 `scripts/collect.sh DIR` downloads the packages (it needs the GitHub CLI). `scripts/sign-checksums.sh SITE` signs every
-release's checksums. `scripts/build-repos.sh DIR SITE` builds the signed repositories with the key whose fingerprint is `SIGNING_KEY` and whose passphrase is in the file
+release's checksums. `scripts/index-pages.sh SITE` gives every directory a listing page, which GitHub Pages does not
+generate. `scripts/build-repos.sh DIR SITE` builds the signed repositories with the key whose fingerprint is `SIGNING_KEY` and whose passphrase is in the file
 `SIGNING_PASSPHRASE_FILE`. It needs `apt-ftparchive`, `createrepo_c`, `rpmsign` and `gpg`.
 
 Contributors follow [CLAUDE.md](CLAUDE.md) and the comment convention in [docs/COMMENTS.md](docs/COMMENTS.md).
