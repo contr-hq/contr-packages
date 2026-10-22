@@ -16,11 +16,14 @@ The same key signs every release's `SHA256SUMS`, published at `checksums/<reposi
 
 ## Install
 
+Contr is in preview and has only prereleases, so these commands use the `testing` channel; replace `testing` with
+`stable` once Contr has a release.
+
 Ubuntu and Debian:
 
 ```sh
 sudo curl -fsSo /usr/share/keyrings/contr.gpg https://contr-hq.github.io/contr-packages/contr.gpg
-echo "deb [signed-by=/usr/share/keyrings/contr.gpg] https://contr-hq.github.io/contr-packages/apt stable main" |
+echo "deb [signed-by=/usr/share/keyrings/contr.gpg] https://contr-hq.github.io/contr-packages/apt testing main" |
   sudo tee /etc/apt/sources.list.d/contr.list
 sudo apt update && sudo apt install contr
 ```
@@ -28,7 +31,7 @@ sudo apt update && sudo apt install contr
 Fedora:
 
 ```sh
-sudo curl -fsSo /etc/yum.repos.d/contr-stable.repo https://contr-hq.github.io/contr-packages/rpm/contr-stable.repo
+sudo curl -fsSo /etc/yum.repos.d/contr-testing.repo https://contr-hq.github.io/contr-packages/rpm/contr-testing.repo
 sudo dnf install contr
 ```
 
