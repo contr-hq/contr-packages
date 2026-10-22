@@ -65,6 +65,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: scripts/sign-checksums.sh site
+      - name: Index every directory
+        if: steps.key.outputs.configured == 'true'
+        run: scripts/index-pages.sh site
       - uses: actions/upload-pages-artifact@v5
         if: steps.key.outputs.configured == 'true'
         with:
