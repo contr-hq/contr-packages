@@ -1,6 +1,7 @@
 name: publish
 
-# Rebuilds the signed APT and DNF repositories from every published release and deploys them to GitHub Pages.
+# Rebuilds the signed APT and DNF repositories and the signed checksums of every published release, and deploys them to
+# GitHub Pages.
 on:
   schedule:
     - cron: '17 3 * * *'
@@ -59,6 +60,11 @@ jobs:
         run: |
           scripts/build-repos.sh "$RUNNER_TEMP/packages" site
           cp pages/index.html site/
+      - name: Sign every release's checksums
+        if: steps.key.outputs.configured == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/sign-checksums.sh site
       - uses: actions/upload-pages-artifact@v5
         if: steps.key.outputs.configured == 'true'
         with:
