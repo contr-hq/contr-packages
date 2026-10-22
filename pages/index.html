@@ -22,15 +22,16 @@ for Ubuntu 26.04 and Fedora 44; <code>contr-daemon</code>, the daemon and CLI, n
 
 <h2>Ubuntu and Debian</h2>
 <pre><code>sudo curl -fsSo /usr/share/keyrings/contr.gpg https://contr-hq.github.io/contr-packages/contr.gpg
-echo "deb [signed-by=/usr/share/keyrings/contr.gpg] https://contr-hq.github.io/contr-packages/apt stable main" |
+echo "deb [signed-by=/usr/share/keyrings/contr.gpg] https://contr-hq.github.io/contr-packages/apt testing main" |
   sudo tee /etc/apt/sources.list.d/contr.list
 sudo apt update &amp;&amp; sudo apt install contr</code></pre>
 
 <h2>Fedora</h2>
-<pre><code>sudo curl -fsSo /etc/yum.repos.d/contr-stable.repo https://contr-hq.github.io/contr-packages/rpm/contr-stable.repo
+<pre><code>sudo curl -fsSo /etc/yum.repos.d/contr-testing.repo https://contr-hq.github.io/contr-packages/rpm/contr-testing.repo
 sudo dnf install contr</code></pre>
 
-<p>Replace <code>stable</code> with <code>testing</code> for prereleases. The signing key is
+<p>Contr is in preview, so these commands use <code>testing</code>; replace it with <code>stable</code> once Contr has a
+release. The signing key is
 <a href="KEY.asc">KEY.asc</a>, fingerprint <code>B947 5E35 EE33 A932 9127  2EFB 2EE1 E61A DBE8 7687</code>.</p>
 
 <h2>Verify a download</h2>
