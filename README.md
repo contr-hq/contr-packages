@@ -11,6 +11,9 @@ workflow sends a `release` dispatch, and by hand.
 | `stable` | Releases |
 | `testing` | Releases and prereleases |
 
+The same key signs every release's `SHA256SUMS`, published at `checksums/<repository>/<tag>/SHA256SUMS` and
+`SHA256SUMS.asc`, so downloads from any Contr release can be checked against it.
+
 ## Install
 
 Ubuntu and Debian:
@@ -33,8 +36,9 @@ sudo dnf install contr
 
 - **APT:** `InRelease` and `Release.gpg` sign each channel's `Release`, which pins every `Packages` file by hash.
 - **DNF:** every RPM carries a signature (`gpgcheck=1`), and `repomd.xml.asc` signs the metadata (`repo_gpgcheck=1`).
-- **Key:** one GnuPG key signs both; [KEY.asc](https://contr-hq.github.io/contr-packages/KEY.asc) is its public half.
-  Only this repository's secrets hold the private key.
+- **Checksums:** `SHA256SUMS.asc` signs each release's `SHA256SUMS`.
+- **Key:** one GnuPG key signs all of these; [KEY.asc](https://contr-hq.github.io/contr-packages/KEY.asc) is its public
+  half, fingerprint `B9475E35EE33A93291272EFB2EE1E61ADBE87687`. Only this repository's secrets hold the private key.
 
 ## Setting up the signing key
 
@@ -64,8 +68,8 @@ every user has to trust a new one.
 
 ## Building locally
 
-`scripts/collect.sh DIR` downloads the packages (it needs the GitHub CLI). `scripts/build-repos.sh DIR SITE` builds the
-signed repositories with the key whose fingerprint is `SIGNING_KEY` and whose passphrase is in the file
+`scripts/collect.sh DIR` downloads the packages (it needs the GitHub CLI). `scripts/sign-checksums.sh SITE` signs every
+release's checksums. `scripts/build-repos.sh DIR SITE` builds the signed repositories with the key whose fingerprint is `SIGNING_KEY` and whose passphrase is in the file
 `SIGNING_PASSPHRASE_FILE`. It needs `apt-ftparchive`, `createrepo_c`, `rpmsign` and `gpg`.
 
 Contributors follow [CLAUDE.md](CLAUDE.md) and the comment convention in [docs/COMMENTS.md](docs/COMMENTS.md).

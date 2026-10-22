@@ -29,6 +29,18 @@ sudo apt update &amp;&amp; sudo apt install contr</code></pre>
 sudo dnf install contr</code></pre>
 
 <p>Replace <code>stable</code> with <code>testing</code> for prereleases. The signing key is
-<a href="KEY.asc">KEY.asc</a>.</p>
+<a href="KEY.asc">KEY.asc</a>, fingerprint <code>B947 5E35 EE33 A932 9127  2EFB 2EE1 E61A DBE8 7687</code>.</p>
+
+<h2>Verify a download</h2>
+<p>Every release's <code>SHA256SUMS</code> is signed with the same key, at
+<code>checksums/&lt;repository&gt;/&lt;tag&gt;/</code>, for example
+<a href="checksums/contr/v0.1.0-alpha.1/">checksums/contr/v0.1.0-alpha.1/</a>.</p>
+<pre><code>curl -fsSO https://contr-hq.github.io/contr-packages/checksums/contr/&lt;tag&gt;/SHA256SUMS
+curl -fsSO https://contr-hq.github.io/contr-packages/checksums/contr/&lt;tag&gt;/SHA256SUMS.asc
+curl -fsS https://contr-hq.github.io/contr-packages/KEY.asc | gpg --import
+gpg --verify SHA256SUMS.asc SHA256SUMS
+sha256sum --check --ignore-missing SHA256SUMS</code></pre>
+<p>GitHub also attests where each release file was built: <code>gh attestation verify &lt;file&gt; --repo
+contr-hq/contr</code>.</p>
 </body>
 </html>
